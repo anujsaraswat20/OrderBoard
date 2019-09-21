@@ -1,6 +1,8 @@
 "OrderBoard" is a SpringBoot project, which can be easily deploy in any of Micro Service Environment.
 
-There is DERBY database used to store/read data/orders. 
+There is runtime DERBY database used to store/read data/orders. No need to install Database separately. 
+
+Also there is no external Tomcat server required to run this SpringBoot application.   
 
 Spring Data JPA used to perform CRUD operation.
 
