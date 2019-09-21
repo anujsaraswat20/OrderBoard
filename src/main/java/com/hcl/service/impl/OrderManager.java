@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ import com.hcl.service.OrderService;
 @Service
 public class OrderManager implements OrderService {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(OrderManager.class);
+	
 	@Autowired
 	OrderRepository orderRepository;
 
@@ -46,19 +50,18 @@ public class OrderManager implements OrderService {
 
 	@Override
 	public List<SalesOrder> getAllOrders() {
-		List<SalesOrder> orders = (List<SalesOrder>) orderRepository.findAll();
-
-		return orders;
+		return (List<SalesOrder>) orderRepository.findAll();
 	}
 
 	@Override
 	public void cancelOrder(Integer id) throws CustomException {
 		if (id == null) {
 			String errorMessage = "Order Id can not be NULL";
+			LOGGER.error(errorMessage);
 			throw new CustomException(HttpStatus.NOT_FOUND.value(), errorMessage);
 		}
 		orderRepository.delete(id);
-		System.out.println("Order deleted successfully");
+		LOGGER.info("Order deleted successfully");
 	}
 
 	@Override
@@ -88,11 +91,6 @@ public class OrderManager implements OrderService {
 				.map(this::mapToCustomisedSalesOrder)
 				.collect(Collectors.toList());
 				
-//		List<SalesOrder> list = map.values().stream()
-//				.sorted(Comparator.comparing(SalesOrder::getOrderType).thenComparing(SalesOrder::getPricePerKg))
-//				.collect(Collectors.toList());
-//
-//		return list.stream().map(this::mapToCustomisedSalesOrder).collect(Collectors.toList());
 	}
 
 	private CustomisedSalesOrder mapToCustomisedSalesOrder(SalesOrder salesOrder) {
@@ -105,6 +103,7 @@ public class OrderManager implements OrderService {
 
 		if (salesOrder == null) {
 			String errorMessage = "Order with id " + id + " does not exists.";
+			LOGGER.info(errorMessage);
 			throw new CustomException(HttpStatus.NOT_FOUND.value(), errorMessage);
 		}
 		return orderRepository.findOne(Integer.valueOf(id));
@@ -113,7 +112,5 @@ public class OrderManager implements OrderService {
 	@Override
 	public void cancelAllOrders() {
 		orderRepository.deleteAll();
-
 	}
-
 }

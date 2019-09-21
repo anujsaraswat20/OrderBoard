@@ -46,7 +46,7 @@ public class OrderController {
 		LOGGER.info("Enter in Create Order methiod with parameters : {}", orders);
 
 		List<SalesOrder> createdOrders = orderService.createOrder(orders);
-		List<ResponseEntity<Void>> response = new ArrayList<ResponseEntity<Void>>();
+		List<ResponseEntity<Void>> response = new ArrayList<>();
 
 		Iterator<SalesOrder> itr = createdOrders.iterator();
 

@@ -30,7 +30,7 @@ public class SpringControllerAdvice {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatus(statusCode);
         errorResponse.setMessage(customException.getStatusMessage());
-        return new ResponseEntity<ErrorResponse>(errorResponse, new HttpHeaders(), 
+        return new ResponseEntity<>(errorResponse, new HttpHeaders(), 
             HttpStatus.valueOf(statusCode));
     }
     
@@ -47,7 +47,7 @@ public class SpringControllerAdvice {
         ErrorResponse errorResponse = new ErrorResponse();
         errorResponse.setStatus(statusCode);
         errorResponse.setMessage(runTimeCustomException.getStatusMessage());
-        return new ResponseEntity<ErrorResponse>(errorResponse, new HttpHeaders(), 
+        return new ResponseEntity<>(errorResponse, new HttpHeaders(), 
             HttpStatus.valueOf(statusCode));
     }
 }

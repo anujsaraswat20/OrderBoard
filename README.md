@@ -1,3 +1,13 @@
+"OrderBoard" is a SpringBoot project, which can be easily deploy in any of Micro Service Environment.
+
+There is DERBY database used to store/read data/orders. 
+
+Spring Data JPA used to perform CRUD operation.
+
+Exception handling implemented by using Spring Controller Advice. All the exceptions from controller layer terminates here. 
+
+User defined error response is being sent to client.
+
 "# OrderBoard" 
 
 step 1: check post in "application.properties" file and change if required
@@ -8,11 +18,13 @@ step 2:
 step 3: 
   after successful compile, go to "target" folder and run "java -jar JAR_FILE_NAME""
 
-
+Following are REST API details: 
 
 -----------------------------------------------------------------------
 To get all orders
+
 URL : http://localhost:8080/getallorders
+
 RequestType = GET
 
 Response:
@@ -61,8 +73,10 @@ Response:
     }
 ]
 -----------------------------------------------------------------------
+
 To create order
-URL : localhost:8080/order/add
+
+URL : http://localhost:8080/order/add
 
 RequestType = POST
 
@@ -176,7 +190,9 @@ Response: Provide Request Headers to get details of created orders
     }
 ]
 -----------------------------------------------------------------------
+
 To get order summary
+
 URI : http://localhost:8080/getordersummary
 
 Request type : GET
@@ -208,6 +224,7 @@ Response:
 -------------------------------------------------------------------------------------------------------
 
 To get single order detail
+
 URI : http://localhost:8080/getorder/1
 
 Request type : GET
@@ -237,7 +254,8 @@ Response :
     "message": "Order with id 12 does not exists."
 }
 ---------------------------------------------------------------------------------------------------------
-Exception handling while sending incorrect id (may be some String):
+
+There is also implemented Exception handling while sending incorrect id (may be some String):
 
 URI : http://localhost:8080/getorder/test
 
@@ -253,13 +271,14 @@ Response :
 
 To cancel all orders:
 
-URI : localhost:8080/cancelallorders
+URI : http://localhost:8080/cancelallorders
 
 Request type : DELETE
 ----------------------------------------------------------------------------------------------------------
 
 To cancel any one specific order:
-URI : localhost:8080/cancelorder/1
+
+URI : http://localhost:8080/cancelorder/1
 
 Request type : DELETE
 Response:
